@@ -112,11 +112,12 @@ function displayChatHistory(chatId) {
 
   chat.messages.forEach((message) => {
     if (message.role !== "system") {
+      const formattedContent = message.content.replace(/\n/g, "<br>");
       const messageHtml = `
         <div class="conversation ${
           message.role === "user" ? "user--question" : "api--answer"
         }">
-          ${message.content}
+          ${formattedContent}
         </div>
       `;
       chatContainer.insertAdjacentHTML("beforeend", messageHtml);
@@ -163,11 +164,12 @@ async function sendMessage() {
     // });
 
     const apiResponse = completion.choices[0].message.content;
+    const formattedResponse = apiResponse.replace(/\n/g, "<br>");
 
     // Display and store API response
     const apiChatHtml = `
       <div class="conversation api--answer">
-        ${apiResponse}
+        ${formattedResponse}
       </div>
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
