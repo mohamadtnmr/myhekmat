@@ -8,8 +8,8 @@
   "name": "hekmat",
   "version": "1.0.0",
   "scripts": {
-    "start": "parcel html/mainindex.html",
-    "build": "parcel build html/mainindex.html"
+    "start": "parcel html/mainIndex.html",
+    "build": "parcel build html/mainIndex.html"
   },
   "keywords": [],
   "author": "",
