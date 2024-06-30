@@ -104,8 +104,26 @@ function clearChatContainer() {
   </div>`;
 }
 function scrollToBottom() {
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+  setTimeout(() => {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // For mobile devices, we'll use scrollIntoView as a fallback
+    const lastMessage = chatContainer.lastElementChild;
+    if (lastMessage) {
+      lastMessage.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, 100);
 }
+
+function adjustViewportHeight() {
+  // First we get the viewport height and multiple it by 1% to get a value for a vh unit
+  let vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+window.addEventListener("resize", adjustViewportHeight);
+adjustViewportHeight();
+
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
   if (!chat || !Array.isArray(chat.messages)) {
