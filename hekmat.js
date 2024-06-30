@@ -165,7 +165,8 @@ async function sendMessage() {
     // });
 
     const apiResponse = completion.choices[0].message.content;
-    const formattedResponse = apiResponse.replace(/\n/g, "<br>");
+    const cleanedResponse = apiResponse.replace(/^#+\s*/gm, "");
+    const formattedResponse = cleanedResponse.replace(/\n/g, "<br>").trim();
 
     // Display and store API response
     const apiChatHtml = `
@@ -175,7 +176,7 @@ async function sendMessage() {
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
     chat.messages.push({ role: "assistant", content: apiResponse });
-    console.log("this is chat:", chat, "this is api:", apiResponse);
+    console.log(completion.choices[0]);
 
     // Save chat history
     saveChatHistory();
