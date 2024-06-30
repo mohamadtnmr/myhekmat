@@ -156,7 +156,7 @@ async function sendMessage() {
     // Get API response
     const completion = await openai.chat.completions.create({
       messages: chat.messages,
-      model: "gpt-4",
+      model: "gpt-4o",
     });
     // const completion = await groq.chat.completions.create({
     //   model: "llama3-8b-8192",
