@@ -10,7 +10,8 @@
   "main": "hekmat.js",
   "type": "module",
   "scripts": {
-    "start": "parcel html/mainindex.html"
+    "start": "parcel html/mainindex.html",
+    "build": "parcel build html/index.html --dist-dir dist"
   },
   "keywords": [],
   "author": "",
