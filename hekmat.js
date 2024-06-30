@@ -172,6 +172,7 @@ async function sendMessage() {
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
     chat.messages.push({ role: "assistant", content: apiResponse });
+    console.log("this is chat:", chat, "this is api:", apiResponse);
 
     // Save chat history
     saveChatHistory();
