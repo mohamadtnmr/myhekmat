@@ -252,13 +252,12 @@ sideSettingIcon.addEventListener("click", function () {
 });
 
 // scroll
-// Add this to your existing JavaScript file
-
 function setupChatScroll() {
   const chatBody = document.querySelector(".chat--body");
   let startY;
   let startScrollTop;
   let touchStartTime;
+  let isScrolling;
 
   chatBody.addEventListener(
     "touchstart",
@@ -266,6 +265,7 @@ function setupChatScroll() {
       startY = e.touches[0].pageY;
       startScrollTop = chatBody.scrollTop;
       touchStartTime = Date.now();
+      isScrolling = false;
     },
     { passive: true }
   );
@@ -273,32 +273,85 @@ function setupChatScroll() {
   chatBody.addEventListener(
     "touchmove",
     (e) => {
+      if (!isScrolling) {
+        e.preventDefault(); // Only prevent default if actively scrolling the chat
+        isScrolling = true;
+      }
       const touch = e.touches[0];
       const deltaY = startY - touch.pageY;
-      chatBody.scrollTop = startScrollTop + deltaY;
+      requestAnimationFrame(() => {
+        chatBody.scrollTop = startScrollTop + deltaY;
+      });
     },
-    { passive: true }
-  );
+    { passive: false }
+  ); // Allow preventDefault
 
   chatBody.addEventListener(
     "touchend",
     (e) => {
+      if (!isScrolling) return;
       const touchEndTime = Date.now();
       const touchDuration = touchEndTime - touchStartTime;
       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
+      const momentum =
+        Math.sign(velocity) * Math.min(500, Math.abs(velocity * 1500)); // Adjust for a more natural decay
 
-      if (Math.abs(velocity) > 0.5) {
-        // Apply momentum scrolling
-        const momentum = velocity * 100;
-        chatBody.scrollTo({
-          top: chatBody.scrollTop + momentum,
-          behavior: "smooth",
-        });
-      }
+      chatBody.scrollTo({
+        top: chatBody.scrollTop + momentum,
+        behavior: "smooth",
+      });
+
+      isScrolling = false;
     },
     { passive: true }
   );
 }
+
+// function setupChatScroll() {
+//   const chatBody = document.querySelector(".chat--body");
+//   let startY;
+//   let startScrollTop;
+//   let touchStartTime;
+
+//   chatBody.addEventListener(
+//     "touchstart",
+//     (e) => {
+//       startY = e.touches[0].pageY;
+//       startScrollTop = chatBody.scrollTop;
+//       touchStartTime = Date.now();
+//     },
+//     { passive: true }
+//   );
+
+//   chatBody.addEventListener(
+//     "touchmove",
+//     (e) => {
+//       const touch = e.touches[0];
+//       const deltaY = startY - touch.pageY;
+//       chatBody.scrollTop = startScrollTop + deltaY;
+//     },
+//     { passive: true }
+//   );
+
+//   chatBody.addEventListener(
+//     "touchend",
+//     (e) => {
+//       const touchEndTime = Date.now();
+//       const touchDuration = touchEndTime - touchStartTime;
+//       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
+
+//       if (Math.abs(velocity) > 0.5) {
+//         // Apply momentum scrolling
+//         const momentum = velocity * 100;
+//         chatBody.scrollTo({
+//           top: chatBody.scrollTop + momentum,
+//           behavior: "smooth",
+//         });
+//       }
+//     },
+//     { passive: true }
+//   );
+// }
 
 // Call this function after the DOM is loaded
 document.addEventListener("DOMContentLoaded", setupChatScroll);
