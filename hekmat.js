@@ -103,7 +103,9 @@ function clearChatContainer() {
     سلام من حکمت هستم. چطور میتوانم کمکتان کنم؟
   </div>`;
 }
-
+function scrollToBottom() {
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
   if (!chat || !Array.isArray(chat.messages)) {
@@ -124,6 +126,7 @@ function displayChatHistory(chatId) {
       chatContainer.insertAdjacentHTML("beforeend", messageHtml);
     }
   });
+  scrollToBottom();
 }
 
 async function sendMessage() {
@@ -150,6 +153,7 @@ async function sendMessage() {
   `;
   chatContainer.insertAdjacentHTML("beforeend", userChatHtml);
   chat.messages.push({ role: "user", content: userMessage });
+  scrollToBottom();
 
   // Clear textarea
   textArea.value = "";
@@ -165,7 +169,8 @@ async function sendMessage() {
     // });
 
     const apiResponse = completion.choices[0].message.content;
-    const formattedResponse = apiResponse.replace(/\n/g, "<br>");
+    const cleanedResponse = apiResponse.replace(/^#+\s*/gm, "");
+    const formattedResponse = cleanedResponse.replace(/\n/g, "<br>").trim();
 
     // Display and store API response
     const apiChatHtml = `
@@ -175,7 +180,8 @@ async function sendMessage() {
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
     chat.messages.push({ role: "assistant", content: apiResponse });
-    console.log("this is chat:", chat, "this is api:", apiResponse);
+    scrollToBottom();
+    console.log(completion.choices[0]);
 
     // Save chat history
     saveChatHistory();
@@ -190,6 +196,7 @@ async function sendMessage() {
       `
     );
   }
+  scrollToBottom();
 }
 
 function saveChatHistory() {
