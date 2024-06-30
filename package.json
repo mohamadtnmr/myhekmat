@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel html/mainIndex.html",
-    "build": "parcel build html/mainIndex.html"
+    "build": "parcel build html/mainIndex.html --dist-dir dist"
   },
   "keywords": [],
   "author": "",
