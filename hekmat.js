@@ -8,7 +8,7 @@ import OpenAI from "openai";
 // require("dotenv").config();
 
 const openai = new OpenAI({
-  apiKey: "sk-proj-LhMGNtFSOmMR8sjeiGorT3BlbkFJS0VhIfBgeNruA1pl0dNR",
+  apiKey: process.env.OPENAI_API_KEY,
   dangerouslyAllowBrowser: true, // This is required for browser usage
 });
 
