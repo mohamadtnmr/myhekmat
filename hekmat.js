@@ -103,7 +103,9 @@ function clearChatContainer() {
     سلام من حکمت هستم. چطور میتوانم کمکتان کنم؟
   </div>`;
 }
-
+function scrollToBottom() {
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
   if (!chat || !Array.isArray(chat.messages)) {
@@ -124,6 +126,7 @@ function displayChatHistory(chatId) {
       chatContainer.insertAdjacentHTML("beforeend", messageHtml);
     }
   });
+  scrollToBottom();
 }
 
 async function sendMessage() {
@@ -150,6 +153,7 @@ async function sendMessage() {
   `;
   chatContainer.insertAdjacentHTML("beforeend", userChatHtml);
   chat.messages.push({ role: "user", content: userMessage });
+  scrollToBottom();
 
   // Clear textarea
   textArea.value = "";
@@ -176,6 +180,7 @@ async function sendMessage() {
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
     chat.messages.push({ role: "assistant", content: apiResponse });
+    scrollToBottom();
     console.log(completion.choices[0]);
 
     // Save chat history
@@ -191,6 +196,7 @@ async function sendMessage() {
       `
     );
   }
+  scrollToBottom();
 }
 
 function saveChatHistory() {
