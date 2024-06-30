@@ -163,12 +163,9 @@ async function sendMessage() {
   chatContainer.insertAdjacentHTML("beforeend", userChatHtml);
   chat.messages.push({ role: "user", content: userMessage });
   scrollToBottom();
-
-  // Clear textarea
   textArea.value = "";
 
   try {
-    // Get API response
     const completion = await openai.chat.completions.create({
       messages: chat.messages,
       model: "gpt-4o",
@@ -181,18 +178,14 @@ async function sendMessage() {
     const cleanedResponse = apiResponse.replace(/^#+\s*/gm, "");
     const formattedResponse = cleanedResponse.replace(/\n/g, "<br>").trim();
 
-    // Display and store API response
     const apiChatHtml = `
       <div class="conversation api--answer">
         ${formattedResponse}
       </div>
     `;
     chatContainer.insertAdjacentHTML("beforeend", apiChatHtml);
-    chat.messages.push({ role: "assistant", content: apiResponse });
+    chat.messages.push({ role: "assistant", content: formattedResponse });
     scrollToBottom();
-    console.log(completion.choices[0]);
-
-    // Save chat history
     saveChatHistory();
   } catch (error) {
     console.error("Error calling API:", error);
@@ -306,52 +299,6 @@ function setupChatScroll() {
     { passive: true }
   );
 }
-
-// function setupChatScroll() {
-//   const chatBody = document.querySelector(".chat--body");
-//   let startY;
-//   let startScrollTop;
-//   let touchStartTime;
-
-//   chatBody.addEventListener(
-//     "touchstart",
-//     (e) => {
-//       startY = e.touches[0].pageY;
-//       startScrollTop = chatBody.scrollTop;
-//       touchStartTime = Date.now();
-//     },
-//     { passive: true }
-//   );
-
-//   chatBody.addEventListener(
-//     "touchmove",
-//     (e) => {
-//       const touch = e.touches[0];
-//       const deltaY = startY - touch.pageY;
-//       chatBody.scrollTop = startScrollTop + deltaY;
-//     },
-//     { passive: true }
-//   );
-
-//   chatBody.addEventListener(
-//     "touchend",
-//     (e) => {
-//       const touchEndTime = Date.now();
-//       const touchDuration = touchEndTime - touchStartTime;
-//       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
-
-//       if (Math.abs(velocity) > 0.5) {
-//         // Apply momentum scrolling
-//         const momentum = velocity * 100;
-//         chatBody.scrollTo({
-//           top: chatBody.scrollTop + momentum,
-//           behavior: "smooth",
-//         });
-//       }
-//     },
-//     { passive: true }
-//   );
-// }
 
 // Call this function after the DOM is loaded
 document.addEventListener("DOMContentLoaded", setupChatScroll);
