@@ -7,8 +7,6 @@
   },
   "name": "hekmat",
   "version": "1.0.0",
-  "main": "hekmat.js",
-  "type": "module",
   "scripts": {
     "start": "parcel html/mainindex.html",
     "build": "parcel build html/mainindex.html --dist-dir dist"
