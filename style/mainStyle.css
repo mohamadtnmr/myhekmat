@@ -21,7 +21,7 @@ html {
 body {
   font-family: "Vazir", sans-serif;
   min-height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 a {
