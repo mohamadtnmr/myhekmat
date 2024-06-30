@@ -44,13 +44,17 @@ button {
 /*responsive*/
 @media (max-width: 500px) {
   .chat--room {
-    height: 93vh;
+    height: 85vh;
   }
-  body{
+  body {
     font-size: 0.7rem;
     position: fixed;
     width: 100%;
     height: 100%;
+  }
+  .main--app {
+    overflow: hidden;
+    height: 500px;
   }
   .side--bar {
     height: 93vh;
@@ -58,22 +62,19 @@ button {
   .side--body {
     height: 200px;
   }
-
 }
 
 @media (max-width: 600px) {
-  body{
+  body {
     font-size: 0.8rem;
   }
-
 }
 @media (min-width: 601px) and (max-width: 768px) {
-  body{
+  body {
     font-size: 0.9rem;
   }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
- 
 }
 @media (min-width: 1025px) {
 }
@@ -82,7 +83,7 @@ button {
 .main--app {
   display: flex;
   flex: 1;
-  height: 100%;
+  height: 88vh;
   width: 100%;
   overflow: hidden;
 }
@@ -93,16 +94,19 @@ button {
   justify-content: space-between;
   align-items: baseline;
   width: 100%;
-  padding: 0px 10px;
   height: max-content;
+  padding: 0px 10px;
   z-index: 20;
   background-color: #40878a;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 
 .setting,
 .new--chat {
-  font-size: 20px;
-  padding: 10px;
+  font-size: 18px;
+  padding: 5px;
   color: #f7d79a;
 }
 .setting:hover,
@@ -113,7 +117,8 @@ button {
 /* chat room */
 .chat--room {
   display: flex;
-  height: 94vh;
+  height: 92.5vh;
+  padding-bottom: 2rem;
   flex: 2;
   flex-direction: column;
   justify-content: space-between;
@@ -127,7 +132,7 @@ button {
 /*chat body*/
 .chat--body {
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   padding: 10px;
   overflow-y: hidden;
   display: flex;
@@ -141,7 +146,7 @@ button {
   width: 6px;
 }
 .chat--body::after {
-  content: '';
+  content: "";
   display: block;
   height: 70px; /* Match the height of chat--foot */
 }
@@ -229,7 +234,7 @@ button {
 /*side body.................*/
 .side--body {
   width: 100%;
-  height: 599px;
+  height: 580px;
   overflow: hidden;
   scrollbar-width: thin;
   scrollbar-color: #d1e3e4 transparent;
@@ -309,11 +314,10 @@ button {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 43px;
+  height: 20vh;
   z-index: 20;
   padding: 10px;
   background-color: #40878a;
-
 }
 
 .account {
@@ -323,4 +327,23 @@ button {
 
 .account--name {
   padding-right: 10px;
+}
+.account:hover,
+.account--name:hover {
+  color: #000808;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  height: max-content;
+  z-index: 20;
+  background-color: #40878a;
+  color: #f7d79a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
