@@ -155,10 +155,10 @@ async function sendMessage() {
   try {
     // Get API response
     const completion = await openai.chat.completions.create({
+      messages: chat.messages,
       model: "gpt-3.5-turbo",
     });
     // const completion = await groq.chat.completions.create({
-    //   messages: chat.messages,
     //   model: "llama3-8b-8192",
     // });
 
