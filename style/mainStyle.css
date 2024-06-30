@@ -179,13 +179,13 @@ button {
   max-height: calc(4 * 1.2em);
 }
 
-.search {
+.sendbtn {
   width: 15%;
   font-size: 20px;
   color: #f7d79a;
   transform: scale(-1, 1);
 }
-.search:hover {
+.sendbtn:hover {
   color: #000808;
 }
 
