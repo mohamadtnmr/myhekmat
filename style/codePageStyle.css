@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body,
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .container {
+    background-image: url(/style/bg.webp);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .code--box {
+    background-color: #f7d79a;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .number--inp {
+    background-color: #428c8f;
+    color: rgb(246, 245, 245);
+    border-radius: 10px;
+    padding: 5px;
+    border: none;
+    height: 40px;
+  }
+  input::placeholder{
+    color: aliceblue;
+  }
+  .login--btn {
+    border: none;
+    padding: 5px;
+    background-color: #428c8f;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .navbar,
+  .welcome {
+    font-size: 40px;
+  }
+  

@@ -1,0 +1,256 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: Vazir;
+  src: url("Vazir-Black-FD-WOL.e31fe290.eot") format("eot"), url("Vazir-Black-FD.24b8362b.woff") format("woff"), url("Vazir-Black.cef8e8c1.eot") format("eot"), url("Vazir-Light-FD.2d63b731.woff2") format("woff2");
+}
+
+body {
+  height: 100%;
+  font-family: Vazir, sans-serif;
+}
+
+a {
+  color: #000808;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: #0000;
+  border: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (width <= 500px) {
+  .chat--body {
+    height: 700px;
+  }
+
+  .side--body {
+    height: 400px;
+  }
+}
+
+.main--app {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.navbar {
+  z-index: 20;
+  background-color: #428c8f;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  height: max-content;
+  padding: 0 10px;
+  display: flex;
+}
+
+.setting, .new--chat {
+  color: #f7d79a;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.chat--room {
+  background-image: url("bg.1d4a98d9.webp");
+  background-position: center;
+  background-size: cover;
+  flex-direction: column;
+  flex: 2;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.chat--body {
+  flex-direction: column;
+  width: 100%;
+  height: 74vh;
+  padding: 10px;
+  display: flex;
+  overflow-y: hidden;
+}
+
+.chat--body:hover {
+  overflow-y: scroll;
+}
+
+.conversation {
+  direction: auto;
+  text-align: justify;
+  background-color: #dcc5c566;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.conversation--1, .api--answer {
+  text-align: right;
+  background-color: #f7d79a;
+  align-self: flex-start;
+  width: 50%;
+}
+
+.conversation--2, .user--question {
+  text-align: left;
+  color: #f7d79a;
+  background-color: #428c8f;
+  align-self: flex-end;
+  width: 50%;
+}
+
+.chat--foot {
+  z-index: 20;
+  background-color: #428c8f;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: max-content;
+  max-height: 200px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+}
+
+.chat--area {
+  resize: none;
+  direction: rtl;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  width: 80%;
+  height: 4.8em;
+  min-height: 4.8em;
+  max-height: 4.8em;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.sendbtn {
+  color: #f7d79a;
+  width: 15%;
+  font-size: 20px;
+  transform: scale(-1, 1);
+}
+
+.sendbtn:hover {
+  color: #000808;
+}
+
+.side--bar {
+  background-color: #428c8f;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.side--body {
+  scrollbar-width: thin;
+  scrollbar-color: #d1e3e4 transparent;
+  background-color: #428c8f;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 599px;
+  padding: 10px;
+  display: flex;
+  overflow: hidden;
+}
+
+.side--body:hover {
+  overflow-y: scroll;
+}
+
+.current--day, .last--day, .last--seven--day {
+  direction: auto;
+  text-align: justify;
+  background-color: #dcc5c566;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.current--day--label, .last--day--label, .last--seven--day--label {
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.today--content, .last--day--content, .last--seven--day--content {
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  display: flex;
+}
+
+.chat {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.chat a {
+  text-align: center;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  padding: 2px;
+  display: flex;
+}
+
+.chat button:hover + .dropdown, .dropdown:hover {
+  display: flex;
+}
+
+.dropdown {
+  background-color: #428c8f;
+  border-radius: 10px;
+  padding: 4px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.side--foot {
+  z-index: 20;
+  justify-content: space-between;
+  width: 100%;
+  height: 43px;
+  padding-right: 10px;
+  display: flex;
+}
+
+.account {
+  color: #f7d79a;
+  font-size: 20px;
+}
+
+.account--name {
+  padding-right: 10px;
+}
+/*# sourceMappingURL=mainindex.5d7a28da.css.map */
