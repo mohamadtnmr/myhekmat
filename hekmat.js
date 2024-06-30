@@ -115,19 +115,6 @@ function scrollToBottom() {
   }, 100);
 }
 
-function setVHVariable() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-}
-
-// Call the function on load
-setVHVariable();
-
-// Call the function on resize
-window.addEventListener("resize", () => {
-  setVHVariable();
-});
-
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
   if (!chat || !Array.isArray(chat.messages)) {
@@ -263,5 +250,57 @@ sendBtn.addEventListener("click", sendMessage);
 sideSettingIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
+
+// scroll
+// Add this to your existing JavaScript file
+
+function setupChatScroll() {
+  const chatBody = document.querySelector(".chat--body");
+  let startY;
+  let startScrollTop;
+  let touchStartTime;
+
+  chatBody.addEventListener(
+    "touchstart",
+    (e) => {
+      startY = e.touches[0].pageY;
+      startScrollTop = chatBody.scrollTop;
+      touchStartTime = Date.now();
+    },
+    { passive: true }
+  );
+
+  chatBody.addEventListener(
+    "touchmove",
+    (e) => {
+      const touch = e.touches[0];
+      const deltaY = startY - touch.pageY;
+      chatBody.scrollTop = startScrollTop + deltaY;
+    },
+    { passive: true }
+  );
+
+  chatBody.addEventListener(
+    "touchend",
+    (e) => {
+      const touchEndTime = Date.now();
+      const touchDuration = touchEndTime - touchStartTime;
+      const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
+
+      if (Math.abs(velocity) > 0.5) {
+        // Apply momentum scrolling
+        const momentum = velocity * 100;
+        chatBody.scrollTo({
+          top: chatBody.scrollTop + momentum,
+          behavior: "smooth",
+        });
+      }
+    },
+    { passive: true }
+  );
+}
+
+// Call this function after the DOM is loaded
+document.addEventListener("DOMContentLoaded", setupChatScroll);
 
 loadChatHistory();
