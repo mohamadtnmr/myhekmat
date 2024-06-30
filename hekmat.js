@@ -1,5 +1,24 @@
 "use strict";
-import { Groq } from "groq-sdk";
+// import { Groq } from "groq-sdk";
+// const groq = new Groq({
+//   apiKey: "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",
+//   dangerouslyAllowBrowser: true,
+// });
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "sk-proj-AIPXkOd8UcXN4MNKSPWWT3BlbkFJibNpRnPKuvKtTf2jOkpl",
+  dangerouslyAllowBrowser: true, // This is required for browser usage
+});
+
+// async function main() {
+//   const completion = await openai.chat.completions.create({
+//     messages: [{ role: "user", content: "Who won the world series in 2020?" }],
+//     model: "gpt-3.5-turbo",
+//   });
+
+//   console.log(completion.choices[0]);
+// }
 
 const chatContainer = document.querySelector(".chat--body");
 const textArea = document.querySelector(".chat--area");
@@ -12,11 +31,6 @@ const sidebarLastSevenDays = document.querySelector(
 );
 const sideBar = document.querySelector(".side--bar");
 const sideSettingIcon = document.querySelector(".setting--icon");
-
-const groq = new Groq({
-  apiKey: "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",
-  dangerouslyAllowBrowser: true,
-});
 
 let currentChatId = null;
 let chats = {};
@@ -140,10 +154,13 @@ async function sendMessage() {
 
   try {
     // Get API response
-    const completion = await groq.chat.completions.create({
-      messages: chat.messages,
-      model: "llama3-8b-8192",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
     });
+    // const completion = await groq.chat.completions.create({
+    //   messages: chat.messages,
+    //   model: "llama3-8b-8192",
+    // });
 
     const apiResponse = completion.choices[0].message.content;
 
