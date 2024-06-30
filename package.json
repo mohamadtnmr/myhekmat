@@ -11,7 +11,7 @@
   "type": "module",
   "scripts": {
     "start": "parcel html/mainindex.html",
-    "build": "parcel build html/index.html --dist-dir dist"
+    "build": "parcel build html/mainindex.html --dist-dir dist"
   },
   "keywords": [],
   "author": "",
