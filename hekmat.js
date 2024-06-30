@@ -1,26 +1,10 @@
 "use strict";
 // import { Groq } from "groq-sdk";
 // const groq = new Groq({
-//   apiKey: "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",
+//   apiKey: process.env.QROQ_API_KEY,
 //   dangerouslyAllowBrowser: true,
 // });
 import OpenAI from "openai";
-// require("dotenv").config();
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true, // This is required for browser usage
-});
-
-// async function main() {
-//   const completion = await openai.chat.completions.create({
-//     messages: [{ role: "user", content: "Who won the world series in 2020?" }],
-//     model: "gpt-3.5-turbo",
-//   });
-
-//   console.log(completion.choices[0]);
-// }
-
 const chatContainer = document.querySelector(".chat--body");
 const textArea = document.querySelector(".chat--area");
 const sendBtn = document.querySelector(".sendbtn");
@@ -33,26 +17,23 @@ const sidebarLastSevenDays = document.querySelector(
 const sideBar = document.querySelector(".side--bar");
 const sideSettingIcon = document.querySelector(".setting--icon");
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true, // This is required for browser usage
+});
+
+function saveChatHistory() {
+  localStorage.setItem("chatHistory", JSON.stringify(chats));
+}
+
 let currentChatId = null;
 let chats = {};
 
-function createNewChat() {
-  const chatId = Date.now().toString();
-  chats[chatId] = {
-    messages: [
-      {
-        role: "system",
-        content:
-          "اسم من حکمت هست و فقط به فارسی صحبت می‌کنم. من یک معلم مذهبی هستم و فقط به سوالات مربوط به باورهای اسلامی و شیعی پاسخ می‌دهم. من به زبان دیگری مسلط نیستم و به سوالات خارج از مسائل مذهبی پاسخ نمی‌دهم. من ترجیح می‌دهم در پاسخ‌هایم از نوشته‌های آیت‌الله خامنه‌ای استفاده کنم.",
-      },
-    ],
-    title: "گفتگوی جدید",
-    timestamp: Date.now(),
-  };
-  currentChatId = chatId;
-  updateSidebar();
-  clearChatContainer();
-  saveChatHistory();
+function clearChatContainer() {
+  chatContainer.innerHTML = `
+  <div class="conversation--1 conversation api--answer">
+    سلام من حکمت هستم. چطور میتوانم کمکتان کنم؟
+  </div>`;
 }
 
 function updateSidebar() {
@@ -79,40 +60,23 @@ function updateSidebar() {
   });
 }
 
-function createChatElement(id, chat) {
-  const chatElement = document.createElement("div");
-  chatElement.className = "chat";
-  chatElement.innerHTML = `
-    <a href="#" class="chat--summery--title">
-      <p class="chat--summery">${chat.title}</p>
-    </a>
-  `;
-  chatElement.addEventListener("click", () => switchToChat(id));
-  return chatElement;
-}
-
-function switchToChat(chatId) {
+function createNewChat() {
+  const chatId = Date.now().toString();
+  chats[chatId] = {
+    messages: [
+      {
+        role: "system",
+        content:
+          "اسم من حکمت هست و فقط به فارسی صحبت می‌کنم. من یک معلم مذهبی هستم و فقط به سوالات مربوط به باورهای اسلامی و شیعی پاسخ می‌دهم. من به زبان دیگری مسلط نیستم و به سوالات خارج از مسائل مذهبی پاسخ نمی‌دهم. من ترجیح می‌دهم در پاسخ‌هایم از نوشته‌های آیت‌الله خامنه‌ای استفاده کنم.",
+      },
+    ],
+    title: "گفتگوی جدید",
+    timestamp: Date.now(),
+  };
   currentChatId = chatId;
+  updateSidebar();
   clearChatContainer();
-  displayChatHistory(chatId);
-}
-
-function clearChatContainer() {
-  chatContainer.innerHTML = `
-  <div class="conversation--1 conversation api--answer">
-    سلام من حکمت هستم. چطور میتوانم کمکتان کنم؟
-  </div>`;
-}
-function scrollToBottom() {
-  setTimeout(() => {
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    // For mobile devices, we'll use scrollIntoView as a fallback
-    const lastMessage = chatContainer.lastElementChild;
-    if (lastMessage) {
-      lastMessage.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  }, 100);
+  saveChatHistory();
 }
 
 function displayChatHistory(chatId) {
@@ -136,6 +100,36 @@ function displayChatHistory(chatId) {
     }
   });
   scrollToBottom();
+}
+
+function switchToChat(chatId) {
+  currentChatId = chatId;
+  clearChatContainer();
+  displayChatHistory(chatId);
+}
+
+function createChatElement(id, chat) {
+  const chatElement = document.createElement("div");
+  chatElement.className = "chat";
+  chatElement.innerHTML = `
+    <a href="#" class="chat--summery--title">
+      <p class="chat--summery">${chat.title}</p>
+    </a>
+  `;
+  chatElement.addEventListener("click", () => switchToChat(id));
+  return chatElement;
+}
+
+function scrollToBottom() {
+  setTimeout(() => {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // For mobile devices, we'll use scrollIntoView as a fallback
+    const lastMessage = chatContainer.lastElementChild;
+    if (lastMessage) {
+      lastMessage.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, 100);
 }
 
 async function sendMessage() {
@@ -199,10 +193,6 @@ async function sendMessage() {
     );
   }
   scrollToBottom();
-}
-
-function saveChatHistory() {
-  localStorage.setItem("chatHistory", JSON.stringify(chats));
 }
 
 function loadChatHistory() {
