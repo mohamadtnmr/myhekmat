@@ -122,6 +122,8 @@ button {
 }
 
 .conversation {
+  white-space: pre-wrap;
+  word-wrap: break-word;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
