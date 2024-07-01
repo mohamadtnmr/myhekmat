@@ -35,17 +35,7 @@ function clearChatContainer() {
     سلام من حکمت هستم. چطور میتوانم کمکتان کنم؟
   </div>`;
 }
-function createChatElement(id, chat) {
-  const chatElement = document.createElement("div");
-  chatElement.className = "chat";
-  chatElement.innerHTML = `
-    <a href="#" class="chat--summery--title">
-      <p class="chat--summery">${chat.title}</p>
-    </a>
-  `;
-  chatElement.addEventListener("click", () => switchToChat(id));
-  return chatElement;
-}
+
 function updateSidebar() {
   const now = new Date();
   const today = now.setHours(0, 0, 0, 0);
@@ -59,12 +49,13 @@ function updateSidebar() {
   Object.entries(chats).forEach(([id, chat]) => {
     const chatElement = createChatElement(id, chat);
     const chatDate = new Date(chat.timestamp).setHours(0, 0, 0, 0);
+
     if (chatDate === today) {
-      sidebarToday.prepend(chatElement);
+      sidebarToday.appendChild(chatElement);
     } else if (chatDate === yesterday) {
-      sidebarYesterday.prepend(chatElement);
+      sidebarYesterday.appendChild(chatElement);
     } else if (chatDate >= lastWeek) {
-      sidebarLastSevenDays.prepend(chatElement);
+      sidebarLastSevenDays.appendChild(chatElement);
     }
   });
 }
@@ -115,6 +106,18 @@ function switchToChat(chatId) {
   currentChatId = chatId;
   clearChatContainer();
   displayChatHistory(chatId);
+}
+
+function createChatElement(id, chat) {
+  const chatElement = document.createElement("div");
+  chatElement.className = "chat";
+  chatElement.innerHTML = `
+    <a href="#" class="chat--summery--title">
+      <p class="chat--summery">${chat.title}</p>
+    </a>
+  `;
+  chatElement.addEventListener("click", () => switchToChat(id));
+  return chatElement;
 }
 
 function scrollToBottom() {
@@ -230,5 +233,64 @@ sendBtn.addEventListener("click", sendMessage);
 sideSettingIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
+
+// scroll
+// function setupChatScroll() {
+//   const chatBody = document.querySelector(".chat--body");
+//   let startY;
+//   let startScrollTop;
+//   let touchStartTime;
+//   let isScrolling;
+
+//   chatBody.addEventListener(
+//     "touchstart",
+//     (e) => {
+//       startY = e.touches[0].pageY;
+//       startScrollTop = chatBody.scrollTop;
+//       touchStartTime = Date.now();
+//       isScrolling = false;
+//     },
+//     { passive: true }
+//   );
+
+//   chatBody.addEventListener(
+//     "touchmove",
+//     (e) => {
+//       if (!isScrolling) {
+//         e.preventDefault(); // Only prevent default if actively scrolling the chat
+//         isScrolling = true;
+//       }
+//       const touch = e.touches[0];
+//       const deltaY = startY - touch.pageY;
+//       requestAnimationFrame(() => {
+//         chatBody.scrollTop = startScrollTop + deltaY;
+//       });
+//     },
+//     { passive: false }
+//   ); // Allow preventDefault
+
+//   chatBody.addEventListener(
+//     "touchend",
+//     (e) => {
+//       if (!isScrolling) return;
+//       const touchEndTime = Date.now();
+//       const touchDuration = touchEndTime - touchStartTime;
+//       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
+//       const momentum =
+//         Math.sign(velocity) * Math.min(500, Math.abs(velocity * 1500)); // Adjust for a more natural decay
+
+//       chatBody.scrollTo({
+//         top: chatBody.scrollTop + momentum,
+//         behavior: "smooth",
+//       });
+
+//       isScrolling = false;
+//     },
+//     { passive: true }
+//   );
+// }
+
+// Call this function after the DOM is loaded
+// document.addEventListener("DOMContentLoaded", setupChatScroll);
 
 loadChatHistory();
