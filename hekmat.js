@@ -51,11 +51,11 @@ function updateSidebar() {
     const chatDate = new Date(chat.timestamp).setHours(0, 0, 0, 0);
 
     if (chatDate === today) {
-      sidebarToday.appendChild(chatElement);
+      sidebarToday.prepend(chatElement);
     } else if (chatDate === yesterday) {
-      sidebarYesterday.appendChild(chatElement);
+      sidebarYesterday.prepend(chatElement);
     } else if (chatDate >= lastWeek) {
-      sidebarLastSevenDays.appendChild(chatElement);
+      sidebarLastSevenDays.prepend(chatElement);
     }
   });
 }
@@ -233,64 +233,5 @@ sendBtn.addEventListener("click", sendMessage);
 sideSettingIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
-
-// scroll
-// function setupChatScroll() {
-//   const chatBody = document.querySelector(".chat--body");
-//   let startY;
-//   let startScrollTop;
-//   let touchStartTime;
-//   let isScrolling;
-
-//   chatBody.addEventListener(
-//     "touchstart",
-//     (e) => {
-//       startY = e.touches[0].pageY;
-//       startScrollTop = chatBody.scrollTop;
-//       touchStartTime = Date.now();
-//       isScrolling = false;
-//     },
-//     { passive: true }
-//   );
-
-//   chatBody.addEventListener(
-//     "touchmove",
-//     (e) => {
-//       if (!isScrolling) {
-//         e.preventDefault(); // Only prevent default if actively scrolling the chat
-//         isScrolling = true;
-//       }
-//       const touch = e.touches[0];
-//       const deltaY = startY - touch.pageY;
-//       requestAnimationFrame(() => {
-//         chatBody.scrollTop = startScrollTop + deltaY;
-//       });
-//     },
-//     { passive: false }
-//   ); // Allow preventDefault
-
-//   chatBody.addEventListener(
-//     "touchend",
-//     (e) => {
-//       if (!isScrolling) return;
-//       const touchEndTime = Date.now();
-//       const touchDuration = touchEndTime - touchStartTime;
-//       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
-//       const momentum =
-//         Math.sign(velocity) * Math.min(500, Math.abs(velocity * 1500)); // Adjust for a more natural decay
-
-//       chatBody.scrollTo({
-//         top: chatBody.scrollTop + momentum,
-//         behavior: "smooth",
-//       });
-
-//       isScrolling = false;
-//     },
-//     { passive: true }
-//   );
-// }
-
-// Call this function after the DOM is loaded
-// document.addEventListener("DOMContentLoaded", setupChatScroll);
 
 loadChatHistory();
