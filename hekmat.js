@@ -291,6 +291,6 @@ sideSettingIcon.addEventListener("click", function () {
 // }
 
 // Call this function after the DOM is loaded
-document.addEventListener("DOMContentLoaded", setupChatScroll);
+// document.addEventListener("DOMContentLoaded", setupChatScroll);
 
 loadChatHistory();
