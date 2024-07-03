@@ -8,9 +8,16 @@ const sideSettingIcon = document.querySelector(".setting--icon");
 const newChatIcon = document.querySelector(".new--chat--icon");
 
 //event listener
-sideSettingIcon.addEventListener("click", function () {
+// Function to toggle the sidebar
+function toggleSidebar() {
   sideBar.classList.toggle("hidden");
-});
+}
+
+// Add event listeners for both click and touchstart
+sideSettingIcon.addEventListener("click", toggleSidebar);
+sideSettingIcon.addEventListener("touchstart", toggleSidebar);
+
+
 
 //for mobile scrolling................................
 document.addEventListener(

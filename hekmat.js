@@ -79,6 +79,7 @@ function createNewChat() {
   saveChatHistory();
 }
 
+
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
   if (!chat || !Array.isArray(chat.messages)) {
