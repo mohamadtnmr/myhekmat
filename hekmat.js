@@ -15,7 +15,7 @@ const sidebarLastSevenDays = document.querySelector(
   ".last--seven--day--content"
 );
 const sideBar = document.querySelector(".side--bar");
-const sideSettingIcon = document.querySelector(".setting--icon");
+const sidebarIcon = document.querySelector(".setting");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -78,7 +78,6 @@ function createNewChat() {
   clearChatContainer();
   saveChatHistory();
 }
-
 
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
@@ -231,71 +230,10 @@ function loadChatHistory() {
 // Event listeners
 newChatBtn.addEventListener("click", createNewChat);
 sendBtn.addEventListener("click", sendMessage);
-sideSettingIcon.addEventListener("click", function () {
+sidebarIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
 
-// scroll
-// function setupChatScroll() {
-//   const chatBody = document.querySelector(".chat--body");
-//   let startY;
-//   let startScrollTop;
-//   let touchStartTime;
-//   let isScrolling;
-
-//   chatBody.addEventListener(
-//     "touchstart",
-//     (e) => {
-//       startY = e.touches[0].pageY;
-//       startScrollTop = chatBody.scrollTop;
-//       touchStartTime = Date.now();
-//       isScrolling = false;
-//     },
-//     { passive: true }
-//   );
-
-//   chatBody.addEventListener(
-//     "touchmove",
-//     (e) => {
-//       if (!isScrolling) {
-//         e.preventDefault(); // Only prevent default if actively scrolling the chat
-//         isScrolling = true;
-//       }
-//       const touch = e.touches[0];
-//       const deltaY = startY - touch.pageY;
-//       requestAnimationFrame(() => {
-//         chatBody.scrollTop = startScrollTop + deltaY;
-//       });
-//     },
-//     { passive: false }
-//   ); // Allow preventDefault
-
-//   chatBody.addEventListener(
-//     "touchend",
-//     (e) => {
-//       if (!isScrolling) return;
-//       const touchEndTime = Date.now();
-//       const touchDuration = touchEndTime - touchStartTime;
-//       const velocity = (chatBody.scrollTop - startScrollTop) / touchDuration;
-//       const momentum =
-//         Math.sign(velocity) * Math.min(500, Math.abs(velocity * 1500)); // Adjust for a more natural decay
-
-//       chatBody.scrollTo({
-//         top: chatBody.scrollTop + momentum,
-//         behavior: "smooth",
-//       });
-
-//       isScrolling = false;
-//     },
-//     { passive: true }
-//   );
-// }
-
-// Call this function after the DOM is loaded
-// document.addEventListener("DOMContentLoaded", setupChatScroll);
-
 loadChatHistory();
-
-
 
 //for style--------------------------------------------------------
