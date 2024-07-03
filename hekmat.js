@@ -160,6 +160,14 @@ async function sendMessage() {
   textArea.value = "";
 
   try {
+    const loadingApi = `
+    <div class="conversation--1 conversation api--answer loader">
+      <li class="ball"></li>
+      <li class="ball"></li>
+      <li class="ball"></li>
+    </div>
+    `;
+    chatContainer.insertAdjacentHTML("beforeend", loadingApi);
     const completion = await openai.chat.completions.create({
       messages: chat.messages,
       model: "gpt-4o",
@@ -168,6 +176,7 @@ async function sendMessage() {
     //   model: "llama3-8b-8192",
     // });
 
+    chatContainer.lastElementChild.remove();
     const apiResponse = completion.choices[0].message.content;
     const cleanedResponse = apiResponse.replace(/^#+\s*/gm, "");
     const formattedResponse = cleanedResponse.replace(/\n/g, "<br>").trim();
@@ -235,5 +244,3 @@ sidebarIcon.addEventListener("click", function () {
 });
 
 loadChatHistory();
-
-//for style--------------------------------------------------------
