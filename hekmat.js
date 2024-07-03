@@ -15,7 +15,7 @@ const sidebarLastSevenDays = document.querySelector(
   ".last--seven--day--content"
 );
 const sideBar = document.querySelector(".side--bar");
-const sideSettingIcon = document.querySelector(".setting--icon");
+const sidebarIcon = document.querySelector(".setting");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -78,7 +78,6 @@ function createNewChat() {
   clearChatContainer();
   saveChatHistory();
 }
-
 
 function displayChatHistory(chatId) {
   const chat = chats[chatId];
@@ -231,12 +230,10 @@ function loadChatHistory() {
 // Event listeners
 newChatBtn.addEventListener("click", createNewChat);
 sendBtn.addEventListener("click", sendMessage);
-sideSettingIcon.addEventListener("click", function () {
+sidebarIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
 
 loadChatHistory();
-
-
 
 //for style--------------------------------------------------------
