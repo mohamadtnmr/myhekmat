@@ -162,10 +162,15 @@ button {
 }
 /*loader........................................................*/
 .loader {
-  width: 60px;
+  width: 50%;
+  height: 60px;
   display: flex;
   justify-content: space-evenly;
-  /* display: none; */
+  align-items: center;
+  align-self: flex-start;
+  background-color: #f7d79a;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
 .ball {
@@ -173,7 +178,7 @@ button {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #40878a;
 }
 
 .ball:nth-child(1) {
@@ -182,7 +187,7 @@ button {
 
 @keyframes bounce-1 {
   50% {
-    transform: translateY(-18px);
+    transform: translateY(-8px);
     width: 6px;
     height: 6px;
   }
@@ -194,7 +199,7 @@ button {
 
 @keyframes bounce-2 {
   50% {
-    transform: translateY(-18px);
+    transform: translateY(-8px);
     width: 6px;
     height: 6px;
   }
@@ -206,7 +211,7 @@ button {
 
 @keyframes bounce-3 {
   50% {
-    transform: translateY(-18px);
+    transform: translateY(-8px);
     width: 6px;
     height: 6px;
   }
