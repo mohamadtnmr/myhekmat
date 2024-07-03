@@ -235,3 +235,7 @@ sideSettingIcon.addEventListener("click", function () {
 });
 
 loadChatHistory();
+
+
+
+//for style--------------------------------------------------------

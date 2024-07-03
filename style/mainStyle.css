@@ -40,7 +40,23 @@ button {
 .hidden {
   display: none !important;
 }
+.hover-cl{
+transition: color 0.5s;
+}
 
+/* Hover effect for non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .hover-cl:hover {
+      color:#000808;
+  }
+}
+
+/* Active effect for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .hover-cl:hover {
+    color:#000808;
+}
+}
 /*responsive*/
 @media (max-width: 500px) {
   .chat--room {
@@ -61,6 +77,9 @@ button {
   }
   .side--body {
     height: 200px;
+  }
+  .conversation--1{
+    width: 90%;
   }
 }
 
@@ -108,11 +127,9 @@ button {
   font-size: 18px;
   padding: 5px;
   color: #f7d79a;
+  transition: color 0.5s;
 }
-.setting:hover,
-.new--chat:hover {
-  color: #000808;
-}
+
 
 /* chat room */
 .chat--room {
@@ -214,10 +231,9 @@ button {
   font-size: 20px;
   color: #f7d79a;
   transform: scale(-1, 1);
+  transition: color 0.5s;
 }
-.sendbtn:hover {
-  color: #000808;
-}
+
 
 /* side bar */
 .side--bar {
@@ -323,15 +339,14 @@ button {
 .account {
   font-size: 20px;
   color: #f7d79a;
+  transition: color 0.5s;
 }
 
 .account--name {
   padding-right: 10px;
+  transition: color 0.5s;
 }
-.account:hover,
-.account--name:hover {
-  color: #000808;
-}
+
 
 footer {
   display: flex;
