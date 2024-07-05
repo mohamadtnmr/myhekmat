@@ -16,6 +16,7 @@ const sidebarYesterday = document.querySelector(".last--day--content");
 const sidebarLastSevenDays = document.querySelector(
   ".last--seven--day--content"
 );
+const btnRemoveChat = document.querySelector('.dropdown--remove')
 const sideBar = document.querySelector(".side--bar");
 const navbarIcon = document.querySelector(".setting");
 
@@ -110,6 +111,8 @@ function switchToChat(chatId) {
   displayChatHistory(chatId);
 }
 
+
+//created chat element
 function createChatElement(id, chat) {
   const chatElement = document.createElement("div");
   chatElement.className = "chat";
@@ -117,10 +120,24 @@ function createChatElement(id, chat) {
     <a href="#" class="chat--summery--title">
       <p class="chat--summery">${chat.title}</p>
     </a>
-  `;
+   <button class="chat--summery--btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <div class="dropdown dropdown-chat--1">
+                    <ul>
+                      <li>
+                        <a href="#" class="dropdown--link">پاک کردن</a>
+                      </li>
+                    </ul>
+                  </div>`;
   chatElement.addEventListener("click", () => switchToChat(id));
   return chatElement;
 }
+
+//remove chat element
+function removeChatElement(){}
+
+
 
 function scrollToBottom() {
   setTimeout(() => {

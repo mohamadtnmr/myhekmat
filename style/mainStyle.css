@@ -335,6 +335,10 @@ button {
   overflow-y: scroll;
 }
 
+.history--hr{
+  color: #40878a;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
 .current--day,
 .last--day,
 .last--seven--day {
@@ -397,7 +401,7 @@ button {
   padding: 4px;
 }
 
-.dropdown--link {
+.dropdown--remove{
   color: #f7d79a;
 }
 
