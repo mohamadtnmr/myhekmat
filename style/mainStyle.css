@@ -76,10 +76,31 @@ button {
   body {
     font-size: 0.9rem;
   }
+  .chat--foot .sendbtn .hover-cl{
+    font-size: 2rem;
+  }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+  .chat--foot .sendbtn .hover-cl{
+    font-size: 2rem;
+  }
+  .navbar .setting, .navbar
+.new--chat{
+  font-size: 2rem;
+}
+
 }
 @media screen and (min-width: 1025px) {
+  .chat--foot .sendbtn .hover-cl{
+    font-size: 2rem;
+  }
+  .navbar .setting, .navbar
+  .new--chat{
+    font-size: 2rem;
+  }
+  .side--foot .account , .side--foot .account--name{
+    font-size: 2rem;
+  }
 }
 /*main app                                         */
 
@@ -264,6 +285,9 @@ button {
   min-height: calc(4 * 1.2em); /* Ensure minimum height */
   max-height: calc(4 * 1.2em);
 }
+.chat--area:focus{
+  background-color: rgb(253, 240, 218);
+}
 
 .sendbtn {
   width: 15%;
@@ -283,6 +307,7 @@ button {
   gap: 10px;
   align-items: center;
   height: 90vh;
+  transition: all 1s;
 }
 
 /*side body.................*/
@@ -312,6 +337,8 @@ button {
   direction: auto;
   text-align: justify;
   background-color: rgb(220, 197, 197, 0.4);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 .current--day--label,
 .last--day--label,
@@ -343,6 +370,10 @@ button {
   width: 100%;
   padding: 2px;
   text-align: center;
+}
+
+.chat--summery:hover{
+color: #f7d79a;
 }
 .chat button:hover + .dropdown,
 .dropdown:hover {

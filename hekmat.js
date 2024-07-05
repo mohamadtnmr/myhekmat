@@ -15,7 +15,7 @@ const sidebarLastSevenDays = document.querySelector(
   ".last--seven--day--content"
 );
 const sideBar = document.querySelector(".side--bar");
-const sidebarIcon = document.querySelector(".setting");
+const navbarIcon = document.querySelector(".setting");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -239,7 +239,7 @@ function loadChatHistory() {
 // Event listeners
 newChatBtn.addEventListener("click", createNewChat);
 sendBtn.addEventListener("click", sendMessage);
-sidebarIcon.addEventListener("click", function () {
+navbarIcon.addEventListener("click", function () {
   sideBar.classList.toggle("hidden");
 });
 
